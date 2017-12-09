@@ -1,0 +1,27 @@
+{
+  "name": "weatherbot",
+  "version": "1.0.0",
+  "description": "a bot to tell the weather",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tranced/slack-weather-bot.git"
+  },
+  "author": "Terence Yang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tranced/slack-weather-bot/issues"
+  },
+  "homepage": "https://github.com/Tranced/slack-weather-bot#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "slackbots": "^1.1.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "9.2.0"
+  }
+}
