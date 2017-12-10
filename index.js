@@ -7,15 +7,16 @@ const weatherAPIKey = process.env.API_KEY;
 let bot = new SlackBot({
 	token: process.env.TOKEN,
 	name : "weather-bot",
-	params : { icon_emoji: ":sunglasses:" }
 });
 
-
+let params = {
+	icon_emoji: ":sunglasses:"
+}
 //initialize slackbot
 bot.on('start', function(){
 
 	bot.postMessageToChannel("general", 
-		"Hi, I'm weather-bot! To ask me about the weather, please send me a message with the format: `!weather city-name``or `!weather city-name,country`", bot.params);
+		"Hi, I'm weather-bot! To ask me about the weather, please send me a message with the format: `!weather city-name``or `!weather city-name,country`", params);
 
 });
 
@@ -55,10 +56,11 @@ let weatherSwitch = function weatherSwitch(id){
 //on event
 bot.on('message', function(data){
 	let user = data.user;
+	
 	//check for exclamation mark in case
 	//future commands are to be added
 	if(data.type == "message" && data.text.substring(0,1) == "!"){
-		console.log("shit");
+
 		//get !weather and then splice off ! mark to get command
 		let cmd = data.text.split(" ", 1)[0].slice(1);
 
@@ -74,14 +76,14 @@ bot.on('message', function(data){
 				let url = `http://api.openweathermap.org/data/2.5/weather?q=${args}&APPID=${weatherAPIKey}`;
 				request(url,function(error, response, body){
 		        	if(error){
-		        		bot.postMessageToChannel("general",error,bot.params);
+		        		bot.postMessageToChannel("general",error,params);
 		        	} else{
 		        		let weather = JSON.parse(body);
 
 		        		//convert Kelvin to fahreinheit
 		        		let fahrenheit = Math.round(9/5*(weather.main.temp-273.15) + 32);
-		        		bot.postMessageToChannel("general", weather.weather[0].main + " " + weatherSwitch(weather.weather[0].id), bot.params);
-		        		bot.postMessageToChannel("general", "It's " + fahrenheit +" degrees Fahrenheit in " + weather.name, bot.params);
+		        		bot.postMessageToChannel("general", weather.weather[0].main + " " + weatherSwitch(weather.weather[0].id), params);
+		        		bot.postMessageToChannel("general", "It's " + fahrenheit +" degrees Fahrenheit in " + weather.name, params);
 		        	}
 	        	})
 		}
