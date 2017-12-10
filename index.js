@@ -3,6 +3,7 @@ const SlackBot = require('slackbots');
 const PORT = process.env.PORT || 5000;
 
 let bot = new SlackBot({
+	PORT: PORT,
 	token: process.env.TOKEN,
 	weatherAPIKey: process.env.API_KEY,
 	name : "weather-bot"
