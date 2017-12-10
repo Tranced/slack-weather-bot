@@ -5,6 +5,7 @@ A simple weather bot that uses the slackbots API: https://www.npmjs.com/package/
 I used this API because it uses a similar pattern to Discord and Telegram bots which I'm familiar with.
 
 Discord bot example: https://medium.com/@renesansz/tutorial-creating-a-simple-discord-bot-9465a2764dc0
+
 In contrast, the heroku/nodejs slackbot tutorial code which is an express app: https://github.com/mattcreager/starbot
 
 ## Work Arounds
