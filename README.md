@@ -11,7 +11,8 @@ In contrast, the heroku/nodejs slackbot tutorial code which is an express app: h
 ## Work Arounds
 
 The slackbots API does not have an accessible way to set the bot's Web Socket port.
-When deployed to Heroku, it would always give the error
+When deployed to Heroku, it would always give the error:
+
 ```Web process failed to bind to $PORT within 60 seconds of launch```
 
 Which can be fixed by changing the dyno type to a worker since it doesn't
