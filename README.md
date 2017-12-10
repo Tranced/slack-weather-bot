@@ -1,8 +1,8 @@
 # slack-weather-bot
 
-A simple weather bot that uses the slackbots API: https://www.npmjs.com/package/slackbots
+A simple weather bot that uses the slackbots library: https://www.npmjs.com/package/slackbots
 
-I used this API because it uses a similar pattern to Discord and Telegram bots which I'm familiar with.
+I used this library because it uses a similar pattern to Discord and Telegram bots which I'm familiar with.
 
 Discord bot example: https://medium.com/@renesansz/tutorial-creating-a-simple-discord-bot-9465a2764dc0
 
