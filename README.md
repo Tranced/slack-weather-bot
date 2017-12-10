@@ -27,3 +27,7 @@ need a port to listen to using this command:
 * PORT fail fix: https://github.com/Naltox/telegram-node-bot/issues/119
 * Heroku/NodeJS tutorial: https://devcenter.heroku.com/articles/getting-started-with-nodejs
 
+## Some things I learned which weren't too useful for this project
+
+* How to manage local variables properly: https://www.twilio.com/blog/2017/08/working-with-environment-variables-in-node-js.html
+* Using Ngrok with express to make basic custom slash commands: https://api.slack.com/tutorials/tunneling-with-ngrok
