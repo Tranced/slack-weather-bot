@@ -63,15 +63,15 @@ bot.on('message', function(data){
 		let cmdStart = data.text.indexOf(" ");
 		switch(cmd){
 			case "weather":
-				let args = data.text.slice(cmdStart+1)
-				let url = `http://api.openweathermap.org/data/2.5/weather?q=${args}&APPID=${weatherAPIKey}`
+				let args = data.text.slice(cmdStart+1);
+				let url = `http://api.openweathermap.org/data/2.5/weather?q=${args}&APPID=${weatherAPIKey}`;
 				request(url,function(error, response, body){
 		        	if(error){
 		        		bot.postMessageToUser(user,error,params);
 		        	} else{
 		        		let weather = JSON.parse(body);
 		        		let fahrenheit = 9/5*(weather.main.temp-273.15) + 32;
-		        		bot.postMessageToUser(user, weather.weather[0].main + " " + weatherSwitch(weather.weather[0].id, params);
+		        		bot.postMessageToUser(user, weather.weather[0].main + " " + weatherSwitch(weather.weather[0].id), params);
 		        		bot.postMessageToUser(user, "It's " + fahrenheit +" degrees Fahrenheit in " + weather.name, params);
 		        	}
 	        	})
