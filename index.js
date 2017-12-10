@@ -77,14 +77,14 @@ bot.on('message', function(data){
 				let url = `http://api.openweathermap.org/data/2.5/weather?q=${args}&APPID=${weatherAPIKey}`;
 				request(url,function(error, response, body){
 		        	if(error){
-		        		bot.postMessageToChannel("general",error,params);
+		        		bot.postMessage(user,error,params);
 		        	} else{
 		        		let weather = JSON.parse(body);
 
 		        		//convert Kelvin to fahreinheit
 		        		let fahrenheit = Math.round(9/5*(weather.main.temp-273.15) + 32);
-		        		bot.postMessageToChannel("general", weather.weather[0].main + " " + weatherSwitch(weather.weather[0].id), params);
-		        		bot.postMessageToChannel("general", "It's " + fahrenheit +" degrees Fahrenheit in " + weather.name, params);
+		        		bot.postMessage(user, weather.weather[0].main + " " + weatherSwitch(weather.weather[0].id), params);
+		        		bot.postMessage(user, "It's " + fahrenheit +" degrees Fahrenheit in " + weather.name, params);
 		        	}
 	        	})
 		}
