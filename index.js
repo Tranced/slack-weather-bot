@@ -1,6 +1,6 @@
 const SlackBot = require('slackbots');
 
-
+const PORT = process.env.PORT || 5000;
 
 let bot = new SlackBot({
 	token: process.env.TOKEN,
@@ -20,4 +20,8 @@ bot.on('start', function(){
 
 bot.on('message', function(data){
 	console.log(data);
+
+	let args = data.text;
+
+	//if(args.substring(0,1) == "!")
 });
