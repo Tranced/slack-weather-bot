@@ -29,5 +29,6 @@ need a port to listen to using this command:
 
 ## Some things I learned which weren't too useful for this project
 
-* How to manage local variables properly: https://www.twilio.com/blog/2017/08/working-with-environment-variables-in-node-js.html
+* How to manage local variables properly: 
+https://www.twilio.com/blog/2017/08/working-with-environment-variables-in-node-js.html
 * Using Ngrok with express to make basic custom slash commands: https://api.slack.com/tutorials/tunneling-with-ngrok
