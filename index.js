@@ -6,18 +6,16 @@ const weatherAPIKey = process.env.API_KEY;
 //make new instance of slackbot
 let bot = new SlackBot({
 	token: process.env.TOKEN,
-	name : "weather-bot"
+	name : "weather-bot",
+	params : { icon_emoji: ":sunglasses:" }
 });
 
 
 //initialize slackbot
 bot.on('start', function(){
-	let params = {
-        icon_emoji: ":sunglasses:"
-    };
 
 	bot.postMessageToChannel("general", 
-		"Hi, I'm weather-bot! To ask me about the weather, please send me a message with the format: `!weather city-name``or `!weather city-name,country`", params);
+		"Hi, I'm weather-bot! To ask me about the weather, please send me a message with the format: `!weather city-name``or `!weather city-name,country`", bot.params);
 
 });
 
@@ -26,7 +24,7 @@ bot.on('start', function(){
 //probably could replace with object literal
 let weatherSwitch = function weatherSwitch(id){
 	//look at first number in code for common weather categories
-	switch(id[0]){
+	switch(id.toString()[0]){
 		case "2":
 			return ":thunder_cloud_and_rain:";
 		case "3":
@@ -54,25 +52,36 @@ let weatherSwitch = function weatherSwitch(id){
 	return ":exlamation:";
 }
 
+//on event
 bot.on('message', function(data){
 	let user = data.user;
 	//check for exclamation mark in case
 	//future commands are to be added
-	if(data.text.substring(0,1) == "!"){
-		let cmd = data.text.splice(1).split(" ", 1);
+	if(data.type == "message" && data.text.substring(0,1) == "!"){
+		console.log("shit");
+		//get !weather and then splice off ! mark to get command
+		let cmd = data.text.split(" ", 1)[0].slice(1);
+
+		//index for rest of arguments
 		let cmdStart = data.text.indexOf(" ");
+
 		switch(cmd){
 			case "weather":
+				//get arguments
 				let args = data.text.slice(cmdStart+1);
+
+				//API call
 				let url = `http://api.openweathermap.org/data/2.5/weather?q=${args}&APPID=${weatherAPIKey}`;
 				request(url,function(error, response, body){
 		        	if(error){
-		        		bot.postMessageToUser(user,error,params);
+		        		bot.postMessageToChannel("general",error,bot.params);
 		        	} else{
 		        		let weather = JSON.parse(body);
-		        		let fahrenheit = 9/5*(weather.main.temp-273.15) + 32;
-		        		bot.postMessageToUser(user, weather.weather[0].main + " " + weatherSwitch(weather.weather[0].id), params);
-		        		bot.postMessageToUser(user, "It's " + fahrenheit +" degrees Fahrenheit in " + weather.name, params);
+
+		        		//convert Kelvin to fahreinheit
+		        		let fahrenheit = Math.round(9/5*(weather.main.temp-273.15) + 32);
+		        		bot.postMessageToChannel("general", weather.weather[0].main + " " + weatherSwitch(weather.weather[0].id), bot.params);
+		        		bot.postMessageToChannel("general", "It's " + fahrenheit +" degrees Fahrenheit in " + weather.name, bot.params);
 		        	}
 	        	})
 		}
