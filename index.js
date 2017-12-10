@@ -12,6 +12,7 @@ let bot = new SlackBot({
 let params = {
 	icon_emoji: ":sunglasses:"
 }
+
 //initialize slackbot
 bot.on('start', function(){
 
@@ -56,7 +57,7 @@ let weatherSwitch = function weatherSwitch(id){
 //on event
 bot.on('message', function(data){
 	let user = data.user;
-	
+
 	//check for exclamation mark in case
 	//future commands are to be added
 	if(data.type == "message" && data.text.substring(0,1) == "!"){
